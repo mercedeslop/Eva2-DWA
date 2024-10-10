@@ -1,0 +1,37 @@
+<div class="container" style="margin-top:70px;">
+    <h3 class="text-center text-uppercase p-2">Editar Usuario</h3>
+    <form action="/usu_edit/{{usuario.id}}" method="POST" class="mt-3">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{usuario.nombre}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" value="{{usuario.apellido}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" value="{{usuario.direccion}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" value="{{usuario.telefono}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{usuario.email}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="contraseña" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="contraseña" name="contraseña" value="{{usuario.contraseña}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_rol" class="form-label">Rol</label>
+            <select class="form-control" id="id_rol" name="id_rol" required>
+                <option value="1" {{#ifCond usuario.id_rol '==' 1}}selected{{/ifCond}}>Usuario</option>
+                <option value="2" {{#ifCond usuario.id_rol '==' 2}}selected{{/ifCond}}>Administrador</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
+    </form>
+</div>

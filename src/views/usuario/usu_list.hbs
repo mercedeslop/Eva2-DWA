@@ -1,0 +1,68 @@
+<div class="container" style="margin-top:70px;">
+    <div class="row mt-5">
+        <h3 class="text-center text-uppercase p-2">Lista de Usuarios</h3>
+
+        <div style="padding: 10px;">
+            <button class="btn btn-danger">
+                <a class="nav-link link-light" aria-current="page" href="/usu_add"> Nuevos Usuarios</a>
+            </button>
+        </div>
+
+        {{#if usuario}}
+        <table class="table text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contraseña</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each usuario}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{nombre}}</td>
+                    <td>{{apellido}}</td>
+                    <td>{{direccion}}</td>
+                    <td>{{telefono}}</td>
+                    <td>{{email}}</td>
+                    <td>{{contraseña}}</td>
+                    <td>{{rol}}</td>
+                    <td>
+                        <div>
+                            <a href="/usu_edit/{{id}}" class="btn btn-warning p-2">
+                                <i class="fa-solid fa-pencil"></i> Actualizar
+                            </a>
+                            <a href="/usu_delete/{{id}}" class="btn btn-danger p-2">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+            <tfoot>
+                <tr class="table-dark">
+                    <td colspan="10">REGISTRO DE Usuarios</td>
+                </tr>
+            </tfoot>
+        </table>
+        {{else}}
+        <div class="card text-center mx-auto" style="width: 350px;">
+            <div class="card-header">
+                <h3>No hay Usuarios disponibles</h3>
+            </div>
+            <div class="card-body">
+                <p>Presiona este botón para agregar un nuevo Usuarios a la tienda.</p>
+                <a href="/usu_add" class="btn btn-primary">Ir a crear</a>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

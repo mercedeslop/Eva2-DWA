@@ -5,6 +5,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 import productoRoutes from './routes/producto.routes.js';
+import usuarioRoutes from './routes/usuario.routes.js';
 
 // Para obtener el directorio actual (__dirname) en módulos ESM:
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -22,15 +23,36 @@ app.engine('.hbs', engine({
     partialsDir: join(app.get('views'), 'partials'),
     extname: '.hbs',
     helpers: {
-        ifCond: function (v1, v2, options) {
-            if (v1 === v2) {
-                return options.fn(this);
+        ifCond: function (v1, operator, v2, options) {
+            switch (operator) {
+                case '==':
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case '===':
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case '!=':
+                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                case '!==':
+                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                case '<':
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case '<=':
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case '>':
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case '>=':
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case '&&':
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case '||':
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
             }
-            return options.inverse(this);
         }
     }
 }));
 app.set('view engine', '.hbs');
+
 
 // Middlewares
 app.use(morgan('dev'));
@@ -47,6 +69,7 @@ app.use(express.static(join(__dirname, 'public')));
 
 // Usar las rutas de productos
 app.use(productoRoutes);
+app.use(usuarioRoutes);
 
 // Iniciar el servidor
 app.listen(app.get('port'), () => {
