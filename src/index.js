@@ -24,6 +24,10 @@ app.engine('.hbs', engine({
     extname: '.hbs',
     helpers: {
         ifCond: function (v1, operator, v2, options) {
+            if (!options) {
+                // Si options es undefined, evita el error devolviendo false
+                return false;
+            }
             switch (operator) {
                 case '==':
                     return (v1 == v2) ? options.fn(this) : options.inverse(this);
@@ -50,6 +54,7 @@ app.engine('.hbs', engine({
             }
         }
     }
+    
 }));
 app.set('view engine', '.hbs');
 
