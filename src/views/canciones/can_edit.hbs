@@ -1,0 +1,26 @@
+<div class="container" style="margin-top:70px;">
+    <h3 class="text-center text-uppercase p-2">Editar Canción</h3>
+    <form action="/can_update/{{cancion.id}}" method="POST" class="mt-3">
+        <div class="mb-3">
+            <label for="producto" class="form-label">Producto</label>
+            <select class="form-control" id="producto" name="id_producto" required>
+                <!-- Iteramos sobre los productos para que el usuario seleccione uno -->
+                {{#each productos}}
+                <option value="{{this.id}}" {{#ifCond this.id '==' ../cancion.id_producto}}selected{{/ifCond}}>
+                    {{this.nombre}}
+                </option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="{{cancion.titulo}}" required>
+        </div>
+        <div class="mb-3">
+            <label for="duracion" class="form-label">Duración</label>
+            <input type="text" class="form-control" id="duracion" name="duracion" value="{{cancion.duracion}}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar canción</button>
+        <a href="/can_list" class="btn btn-secondary mt-2">Cancelar</a>
+    </form>
+</div>
