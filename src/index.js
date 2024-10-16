@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 
 import productoRoutes from './routes/producto.routes.js';
 import usuarioRoutes from './routes/usuario.routes.js';
+import generoRoutes from './routes/gereno.routes.js';
 
 // Para obtener el directorio actual (__dirname) en módulos ESM:
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -75,6 +76,7 @@ app.use(express.static(join(__dirname, 'public')));
 // Usar las rutas de productos
 app.use(productoRoutes);
 app.use(usuarioRoutes);
+app.use(generoRoutes);
 
 // Iniciar el servidor
 app.listen(app.get('port'), () => {
